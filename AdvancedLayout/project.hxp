@@ -1,0 +1,26 @@
+import lime.project.*;
+import sys.FileSystem;
+
+class Project extends HXProject {
+	public function new() {
+		super();
+		
+		meta.title = "AdvancedLayoutDemo";
+		meta.packageName = "com.player03.advancedlayoutdemo";
+		meta.company = "player_03";
+		
+		app.main = "com.player03.advancedlayoutdemo.Main";
+		app.path = "bin";
+		app.file = "AdvancedLayoutDemo";
+		
+		window.background = 0xEEEEEE;
+		
+		sources.push("src");
+		
+		haxelibs.push(new Haxelib("openfl"));
+		haxelibs.push(new Haxelib("advanced-layout"));
+		
+		includeAssets("assets/img", "img");
+		icons.push(new Icon("assets/openfl.svg"));
+	}
+}
