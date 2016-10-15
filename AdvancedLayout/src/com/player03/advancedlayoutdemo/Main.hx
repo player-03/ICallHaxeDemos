@@ -18,7 +18,7 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
 
-using layout.LayoutUtils;
+using layout.LayoutCreator;
 
 /**
  * @author Joseph Cloutier
