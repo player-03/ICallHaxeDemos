@@ -1,0 +1,51 @@
+import lime.project.*;
+import sys.FileSystem;
+
+class Project extends HXProject {
+	public function new() {
+		super();
+		
+		meta.title = "DisplayObjectHierarchy";
+		meta.packageName = "com.player03.demo.hierarchy";
+		meta.company = "player_03";
+		
+		app.main = "com.player03.demo.hierarchy.Main";
+		app.path = "bin";
+		app.file = "DisplayObjectHierarchy";
+		
+		window.background = 0xEEEEEE;
+		
+		sources.push("src");
+		
+		haxelibs.push(new Haxelib("openfl"));
+		
+		includeAssets("assets/font", "font");
+		
+		forwardCommandLine();
+	}
+	
+	private function forwardCommandLine():Void {
+		var argsParser:EReg = ~/^y(\d+):/;
+		var args:String = Sys.args()[4];
+		
+		if(args.charAt(0) != "b") {
+			throw 'Can\'t parse "$args"!';
+		}
+		args = args.substr(1);
+		
+		while(argsParser.match(args)) {
+			args = argsParser.matchedRight();
+			
+			var length:Int = Std.parseInt(argsParser.matched(1));
+			if(length > 0) {
+				var arg:String = args.substr(0, length);
+				if(arg != "openfl" && !haxedefs.exists(arg)) {
+					haxedefs[arg] = 1;
+					app.file += "_" + arg;
+				}
+				
+				args = args.substr(length);
+			}
+		}
+	}
+}
